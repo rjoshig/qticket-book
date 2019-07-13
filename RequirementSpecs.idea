@@ -1,0 +1,258 @@
+Design
+    - tabs in the bootom
+        - Dashboard Schedules Manage 
+
+
+
+
+
+
+
+
+
+
+Vehile booking appl;
+
+
+a) Prime use case in android appl
+b)
+
+1. Roles
+    1) Customer
+    2) Driver
+    3) Owner
+    4) BookingOperator
+    5) Admin (app developer)
+
+
+Role 1: Customer
+    a) Should be able to view schedules and vehicle details
+    b) Should be able to book specific time and day and see available seats
+    c) Should be able to rate vehicle and driver
+    d) Should be able to cancel booking (24hrs before free)
+    e) Should be able to make payments
+    
+Role 2: Driver
+    a) Should be able to see bookings details
+    b) Should be able to see pickup details
+    c) Should be able to generate signal that vehicle has started from source. These signals should be pushed to customer mobiles.
+    d) Sould be able to update days in service
+    e) Should be able to update time of the day. (need to be approved by Booking operator)
+
+Role 3: Owner:
+   a) Should be able to see Accounts
+
+Role 4: Booking Operator/Loading Facilitator / On call persons employed by app developer---> May not need this
+    a) Admin role /Moderator role
+        - cant create another operator
+    b) should be able to add routes
+    c) should be able to add vehicles in service
+    d) should be able to set vehicle service time and days
+    e) should be able to add drivers
+
+Role 5: Admin
+    a) Full permission
+    b) Should be able to add vehicles
+
+    ==============x===============x====================x=====================x=======================x============
+    
+========data structure============
+
+Users --> id --> { 
+        id
+        type: customer, admin, seller, 
+        Address,
+        booking_history {
+            date
+            from
+            to
+
+        }
+}
+
+
+Vehicle --> id --> {
+        id
+        type
+        seat
+        routes {
+
+        }
+        schedules {
+
+        }
+}
+
+
+
+
+
+
+Users {
+    id --doc
+    type
+    Address: {}
+    Profile:
+}
+
+
+
+
+
+
+
+
+customer:
+    -customer-id
+    -name
+    -address
+    -verified (y/n)
+    -payment methods
+            -card
+            -cash
+    -acct_active(y/n)
+
+Drivers:
+    -driverid
+    -licence number
+    -phone number
+    -vehicle numbers
+
+
+    
+vehicleregister:
+    -vehicle_id
+    -vehicle-number
+    -Vehicle-name
+    -make
+    -model
+    -year
+    -routes-id
+    -schedule-id
+    -seat-arrangement-id
+    -bookedSeatCount
+
+routesRegister:
+    - routes-id
+    - from
+    - to
+    - distance
+    - rate/seat
+
+scheduleregister:
+    - schedule_id
+    - routes_id
+    - routes-from
+    - routes-to
+    - source-time-of-day
+    - return-time-of-day
+    - days (array)
+    - loadingZone
+
+seats:
+    -seat-arrangement-id
+    -seatsAvailableCount
+
+bookings:
+    -service-date
+    -routes-id
+    -vehicle-number
+    -customer-id
+    -seat-arrangement-id
+    -payment-method
+    -schedule-id
+    -seatsAvailableCount
+    -numberOfSeatBooked
+    -seatSelected [numberOfSeatBooked]
+    -isBookingActive
+    -isBookingCancelled
+    -bookingDateTime
+    -cancelledDateTime
+    -cancelCode 
+    -receipt-number
+
+
+seatBookingMaster:
+    -service-date
+    -routes-id
+    -vehicle-number
+    -seat-arrangement-id
+    -seatArray [seatsAvailableCount]
+
+PickupLocations:
+    -pick-up-loc-id
+    -pic-up-point
+
+=============================================COMPONENTS===========================
+
+      BookingSearchPage/Homepage
+            -- DatePick
+            -- from  to
+            -- NumberOfSeats
+            -- list all vehicle with time starting right now that has seats > NumberOfSeats
+
+      
+      BookingPage
+            -display vehicle number
+            -route
+            -date/time
+            -LoadingZone
+            -PickupPoint-Enter
+            -SeatSelectionMenu-Enter (display available/greyout unavailable)
+            -SubmitButton/CancelButton/BackButton
+            -ConfirmPopup
+            -paymentPage--Enter
+            -ConfirmationPage
+                -receiptNumber
+                -barcode
+
+===================================COMPONENTS VUE ========================
+
+
+    /components
+
+      AppHeader
+      AppFooter
+      AppLogin/Register 
+      AppSettings
+      Navigation
+
+      CustomerDashboard
+      AppHome
+      Schedules
+
+
+dashboard
+    RegisterSchedule
+    RegisterVehicle
+    RegisterRoute
+    RegisterSeatArrangement
+
+
+
+bookings
+
+
+
+tools
+ vuejs
+ vuex
+ vue-router
+ firebase
+    firestore
+    auth
+    storage
+
+
+
+UI --. https://vuetifyjs.com/en/components/footer
+
+
+
+
+
+
+
+
+
+
